@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookies("token"));
-app.use(express.static(path.resolve("./public/images/uploads")));
+app.use(express.static(path.resolve("./public")));
 
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
