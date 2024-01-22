@@ -9,7 +9,24 @@
 <body>
     <%- include("./partials/nav") %>
         Homepage
-        <%= JSON.stringify(user) %>
+
+        <div class="container">
+            <% blogs.forEach(blog => { %>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%= blog.coverImageURL %>" class="card-img-top">
+                    <p>
+                        <%= blog.title %>
+                    </p>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <%= blog.body %>
+                        </p>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+
+        <!-- <%= JSON.stringify(blogs) %> -->
         <%- include("./partials/script") %>
 </body>
 
