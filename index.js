@@ -1,15 +1,15 @@
 const express = require('express')
-const path = require("path")
 const app = express()
 const port = 4000
+const path = require("path")
 const mongoose = require("mongoose");
 
 const cookieParser = require('cookie-parser');
-
 const Blogs = require("./models/blogs");
 
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
+
 const { checkForAuthenticationCookies } = require('./middlewares/authentication');
 
 mongoose.connect("mongodb://127.0.0.1:27017/blogistan")
@@ -28,11 +28,13 @@ app.use(cookieParser());
 app.use(checkForAuthenticationCookies("token"));
 app.use(express.static(path.resolve("./public")));
 
+
+
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
 
 app.get("/", async (req, res) => {
-    const allBlogs = await Blogs.find({});
+    const allBlogs = await Blogs.find({}).sort("createdAt");
     return res.render("index", {
         user: req.user,
         blogs: allBlogs,
@@ -40,4 +42,4 @@ app.get("/", async (req, res) => {
 });
 
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!!!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}`))

@@ -11,22 +11,27 @@
         Homepage
 
         <div class="container">
-            <% blogs.forEach(blog => { %>
-                <div class="card" style="width: 18rem;">
-                    <img src="<%= blog.coverImageURL %>" class="card-img-top">
-                    <p>
-                        <%= blog.title %>
-                    </p>
-                    <div class="card-body">
-                        <p class="card-text">
-                            <%= blog.body %>
-                        </p>
+            <div class="row row-cols-4">
+                <% blogs.forEach((blog)=> { %>
+                    <div class="col mt-3">
+                        <div class="card col" style="width: 18rem;">
+                            <img src="<%= blog.coverImageURL %>" alt="imageeeeeeeeee">
+                            <p>
+                                <%= blog.title %>
+                            </p>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <%= blog.body %>
+                                </p>
+                            </div>
+                            <a class="btn btn-outline-info mt-3" href="/blog/<%= blog._id %>">View full blog
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <% }) %>
+                    <% }) %>
+            </div>
         </div>
 
-        <!-- <%= JSON.stringify(blogs) %> -->
         <%- include("./partials/script") %>
 </body>
 
