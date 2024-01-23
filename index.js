@@ -5,7 +5,10 @@ const path = require("path")
 const mongoose = require("mongoose");
 
 const cookieParser = require('cookie-parser');
+
 const Blogs = require("./models/blogs");
+const Comment = require('./models/comment');
+
 
 const userRoute = require("./routes/user");
 const blogRoute = require("./routes/blog");
@@ -33,6 +36,7 @@ app.use(express.static(path.resolve("./public")));
 app.use("/user", userRoute);
 app.use("/blog", blogRoute);
 
+
 app.get("/", async (req, res) => {
     const allBlogs = await Blogs.find({}).sort("createdAt");
     return res.render("index", {
@@ -40,6 +44,7 @@ app.get("/", async (req, res) => {
         blogs: allBlogs,
     });
 });
+
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
