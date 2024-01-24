@@ -20,22 +20,40 @@
         </div>
 
         <div class="container">
-            <img src="<%= blog.createdBy.profileImageURL %>" alt="first" height="100px" width="100px">
+            <img src="<%= blog.createdBy.profileImageURL %>" alt="first" height="70px" width="70px">
             ~<%= blog.createdBy.fullName %>
         </div>
 
-        <% if (locals.user) { %>
-            <div class="container mt-3 mb-3">
-                <h2>Views</h2>
-                <form action="/blog/comment/<%= blog._id %>" method="post">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="content" aria-describedby="content" name="content"
-                            placeholder="Add your views">
+        <!-- <% if (locals.user) { %> -->
+        <div class="container mt-3 mb-3">
+            <h2>Views</h2>
+            <form action="/blog/comment/<%= blog._id %>" method="post">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="content" aria-describedby="content" name="content"
+                        placeholder="Add your views">
+                </div>
+                <a href="/blog/<%= blog.id %>">
+                    <button type="submit" class="btn btn-outline-info">Add</button></a>
+            </form>
+        </div>
+        <!-- <% } %> -->
+        <% if (allComments.length>1) { %>
+            <div class="container mt-3">
+                <h4>
+                    Comments : (<%= allComments.length %>)
+                </h4>
+                <% allComments.forEach(comment=> { %>
+                    <div class="container">
+                        <img src="<%= comment.createdBy.profileImageURL %>" alt="first" height="50px" width="50px">
+                        <%= comment.createdBy.fullName%>:
+                            <pre class="container mt-3"><%= comment.content %></pre>
+                            </pre>
                     </div>
-                    <button type="submit" class="btn btn-outline-info">Add</button>
-                </form>
+                    <% }) %>
             </div>
             <% } %>
+
+
 
 
                 <%- include("./partials/script") %>
